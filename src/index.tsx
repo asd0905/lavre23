@@ -14,6 +14,23 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     font-style: normal;
   }
+
+  .BtmSlider {
+    .slick-list {
+.slick-track {
+      display: flex;
+      align-items: flex-start;
+    }
+    }
+  }
+  
+  .slick-list {
+    overflow: visible;
+    .slick-track {
+      display: flex;
+      align-items: flex-end;
+    }
+  }
 `;
 
 const root = ReactDOM.createRoot(

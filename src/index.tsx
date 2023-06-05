@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createGlobalStyle } from "styled-components";
+import {BrowserRouter} from 'react-router-dom';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -38,8 +39,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
 	<React.StrictMode>
-		<GlobalStyle />
-		<App />
+		<BrowserRouter>
+			<GlobalStyle />
+			<App />
+		</BrowserRouter>
 	</React.StrictMode>
 );
 

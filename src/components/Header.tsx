@@ -1,38 +1,188 @@
-import React from 'react';
-import styled from 'styled-components';
-import {Link} from 'react-router-dom';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { isBodyFixedAtom } from "../atoms";
+import { useSetRecoilState } from "recoil";
+import { AnimatePresence, motion } from "framer-motion";
 
 const SHeader = styled.header`
-    display: flex;
-    justify-content: center;
-    height: 100px;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	height: 100px;
+	align-items: center;
+	width: 100%;
 	.logo {
-        //position: fixed;
-        //left: 50%;
-        //bottom: 60px;
-        //top: initial;
-        //transform: translateX(-50%);
-        max-width: 160px;
-        display: block;
-        @media screen and (min-width: 500px) {
-            top: 100px;
-            bottom: initial;
-        }
-        @media screen and (max-width: 500px) {
-            max-width: 30%;
-        }
-        img {
-            display: block;
-            max-width: 100%;
-        }
-    }
+		max-width: 160px;
+		@media screen and (min-width: 500px) {
+			bottom: initial;
+		}
+		@media screen and (max-width: 500px) {
+			max-width: 40%;
+		}
+	}
+
+	@media screen and (max-width: 500px) {
+		position: absolute;
+		bottom: 0;
+	}
+
+	.headLeftMenu {
+		display: flex;
+		height: 100%;
+		align-items: center;
+		.leftMenu {
+			height: 100%;
+			cursor: pointer;
+			padding: 15px 10px;
+			display: flex;
+			align-items: center;
+			svg {
+				width: 20px;
+				height: 20px;
+			}
+			@media screen and (min-width: 767px) {
+				padding: 15px 20px;
+				svg {
+					width: 30px;
+					height: 30px;
+				}
+			}
+		}
+	}
+`;
+
+const SLogo = styled.h1<{ logo1: string; logo2: string }>`
+	max-width: 160px;
+	background-image: url(${(props) => props.logo2});
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	width: 300px;
+	height: 100px;
+	max-width: 100%;
+	@media screen and (max-width: 500px) {
+		background-image: url(${(props) => props.logo1});
+	}
+`;
+
+const SLayout = styled.div`
+	.menu {
+		background-color: #fff;
+		width: 80vw;
+		max-width: 400px;
+		height: 100vh;
+		position: fixed;
+		left: 0;
+		top: 0;
+		z-index: 10;
+		display: grid;
+		grid-template-rows: 1fr 50px;
+		.menu-list {
+			overflow-y: auto;
+			ul {
+				border-top: 1px solid rgba(0, 0, 0, 0.04);
+				margin-top: 9px;
+				padding-top: 13px;
+				li {
+					a,
+					span {
+						display: flex;
+						height: 50px;
+						align-items: center;
+						color: #000;
+						padding: 0 20px;
+						font-size: 16px;
+					}
+				}
+			}
+		}
+	}
+`;
+
+export const SOverlay = styled(motion.div)`
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.5);
+	top: 0;
+	left: 0;
+	z-index: 10;
 `;
 
 export default function Header() {
-    return <SHeader>
-        <Link className={'logo'} to={'/'}>
-            <img src={`${process.env.PUBLIC_URL}/img/logo_02.png`} alt='img' />
-        </Link>
-    </SHeader>
+	const [isMenu, setIsMenu] = useState(false);
+	const setIsBodyFix = useSetRecoilState(isBodyFixedAtom);
+	const handleMenuClick = () => {
+		setIsMenu((prev) => !prev);
+		setIsBodyFix(true);
+	};
+	return (
+		<SLayout>
+			<SHeader>
+				<div className={"headLeftMenu"}>
+					<span className={"leftMenu"} onClick={handleMenuClick}>
+						<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'>
+							<path d='M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z' />
+						</svg>
+					</span>
+				</div>
+				<Link className={"logo"} to={"/"}>
+					<SLogo
+						logo1={`${process.env.PUBLIC_URL}/img/logo_01.png`}
+						logo2={`${process.env.PUBLIC_URL}/img/logo_02.png`}
+					/>
+				</Link>
+			</SHeader>
+			<AnimatePresence>
+				{isMenu ? (
+					<>
+						<SOverlay
+							key={"menuOverlay"}
+							onClick={() => {
+								setIsMenu(false);
+								setIsBodyFix(false);
+							}}
+							transition={{ duration: 0.2 }}
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+						/>
+						<motion.div
+							className='menu'
+							key={"menu"}
+							transition={{ duration: 0.2 }}
+							initial={{ left: "-100%" }}
+							animate={{ left: 0 }}
+							exit={{ left: "-100%" }}
+						>
+							<div className='menu-list'>
+								<ul>
+									<li>
+										<Link
+											onClick={() => {
+												setIsMenu(false);
+												setIsBodyFix(false);
+											}}
+											to={`/lavre23`}
+										>
+											홈
+										</Link>
+										<Link
+											onClick={() => {
+												setIsMenu(false);
+												setIsBodyFix(false);
+											}}
+											to={`/list`}
+										>
+											신규
+										</Link>
+									</li>
+								</ul>
+							</div>
+						</motion.div>
+					</>
+				) : null}
+			</AnimatePresence>
+		</SLayout>
+	);
 }

@@ -3,7 +3,8 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createGlobalStyle } from "styled-components";
-import {BrowserRouter} from 'react-router-dom';
+import { BrowserRouter } from "react-router-dom";
+import { RecoilRoot } from "recoil";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -40,8 +41,10 @@ const root = ReactDOM.createRoot(
 root.render(
 	<React.StrictMode>
 		<BrowserRouter>
-			<GlobalStyle />
-			<App />
+			<RecoilRoot>
+				<GlobalStyle />
+				<App />
+			</RecoilRoot>
 		</BrowserRouter>
 	</React.StrictMode>
 );

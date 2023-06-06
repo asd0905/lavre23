@@ -12,6 +12,7 @@ const SHeader = styled.header`
 	align-items: center;
 	width: 100%;
 	position: relative;
+	background-color: #fff;
 	.logo {
 		max-width: 160px;
 		@media screen and (min-width: 500px) {
@@ -23,7 +24,7 @@ const SHeader = styled.header`
 	}
 
 	@media screen and (max-width: 500px) {
-		position: absolute;
+		position: fixed;
 		bottom: 0;
 	}
 

@@ -11,6 +11,7 @@ const SHeader = styled.header`
 	height: 100px;
 	align-items: center;
 	width: 100%;
+	position: relative;
 	.logo {
 		max-width: 160px;
 		@media screen and (min-width: 500px) {
@@ -26,27 +27,28 @@ const SHeader = styled.header`
 		bottom: 0;
 	}
 
-	.headLeftMenu {
-		display: flex;
+	.menu-btn {
 		height: 100%;
+		cursor: pointer;
+		padding: 15px 10px 35px;
+		display: flex;
 		align-items: center;
-		.leftMenu {
-			height: 100%;
-			cursor: pointer;
-			padding: 15px 10px;
-			display: flex;
-			align-items: center;
+		position: absolute;
+		left: 0;
+		top: 0;
+		svg {
+			width: 20px;
+			height: 20px;
+		}
+		@media screen and (min-width: 767px) {
+			padding: 15px 20px;
 			svg {
-				width: 20px;
-				height: 20px;
+				width: 30px;
+				height: 30px;
 			}
-			@media screen and (min-width: 767px) {
-				padding: 15px 20px;
-				svg {
-					width: 30px;
-					height: 30px;
-				}
-			}
+		}
+		@media screen and (max-width: 500px) {
+			display: none;
 		}
 	}
 `;
@@ -80,9 +82,6 @@ const SLayout = styled.div`
 		.menu-list {
 			overflow-y: auto;
 			ul {
-				border-top: 1px solid rgba(0, 0, 0, 0.04);
-				margin-top: 9px;
-				padding-top: 13px;
 				li {
 					a,
 					span {
@@ -96,6 +95,9 @@ const SLayout = styled.div`
 				}
 			}
 		}
+		@media screen and (max-width: 500px) {
+			display: none;
+		}
 	}
 `;
 
@@ -107,9 +109,12 @@ export const SOverlay = styled(motion.div)`
 	top: 0;
 	left: 0;
 	z-index: 10;
+	@media screen and (max-width: 500px) {
+		display: none;
+	}
 `;
 
-export default function Header() {
+function Header() {
 	const [isMenu, setIsMenu] = useState(false);
 	const setIsBodyFix = useSetRecoilState(isBodyFixedAtom);
 	const handleMenuClick = () => {
@@ -119,13 +124,11 @@ export default function Header() {
 	return (
 		<SLayout>
 			<SHeader>
-				<div className={"headLeftMenu"}>
-					<span className={"leftMenu"} onClick={handleMenuClick}>
-						<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'>
-							<path d='M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z' />
-						</svg>
-					</span>
-				</div>
+				<span className={"menu-btn"} onClick={handleMenuClick}>
+					<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'>
+						<path d='M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z' />
+					</svg>
+				</span>
 				<Link className={"logo"} to={"/"}>
 					<SLogo
 						logo1={`${process.env.PUBLIC_URL}/img/logo_01.png`}
@@ -150,7 +153,7 @@ export default function Header() {
 						<motion.div
 							className='menu'
 							key={"menu"}
-							transition={{ duration: 0.2 }}
+							transition={{ duration: 0.1 }}
 							initial={{ left: "-100%" }}
 							animate={{ left: 0 }}
 							exit={{ left: "-100%" }}
@@ -174,7 +177,7 @@ export default function Header() {
 											}}
 											to={`/list`}
 										>
-											신규
+											상품
 										</Link>
 									</li>
 								</ul>
@@ -186,3 +189,4 @@ export default function Header() {
 		</SLayout>
 	);
 }
+export default React.memo(Header);

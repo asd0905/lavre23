@@ -1,6 +1,7 @@
-import Slider from "react-slick";
+import Slider, { LazyLoadTypes } from "react-slick";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import ProgressiveImage from "react-progressive-graceful-image";
 
 const SliderBox = styled.div`
 	display: flex !important;
@@ -14,6 +15,14 @@ const SliderBox = styled.div`
 		position: relative;
 		bottom: -14px;
 		max-width: 550px;
+	}
+	.loading {
+		filter: blur(10px);
+		clip-path: inset(0);
+	}
+	.loaded {
+		filter: blur(0);
+		transition: filter 0.5s linear;
 	}
 `;
 
@@ -54,9 +63,9 @@ const BottomSliderBox = styled.div`
 	}
 `;
 
-export default function MainSlide() {
+function MainSlide() {
 	const commonSetting = {
-		// lazyLoad: "progressive" as LazyLoadTypes,
+		// lazyLoad: "anticipated" as LazyLoadTypes,
 		dots: false,
 		infinite: true,
 		speed: 0,
@@ -145,10 +154,26 @@ export default function MainSlide() {
 					<Slider ref={sliderTop} {...settingsTop}>
 						{topImgArr.map((img) => (
 							<SliderBox key={`top_${img}`}>
-								<img
+								{/* <img
 									src={`${process.env.PUBLIC_URL}/img/top_${img}.png`}
 									alt='img'
-								/>
+								/> */}
+
+								<ProgressiveImage
+									noLazyLoad={true}
+									src={`${process.env.PUBLIC_URL}/img/top_${img}.png`}
+									placeholder={`${process.env.PUBLIC_URL}/img/top_${img}_s.gif`}
+								>
+									{(src, loading) => (
+										<img
+											className={`image${loading ? " loading" : " loaded"}`}
+											src={src}
+											alt='img'
+											// width='700'
+											// height='465'
+										/>
+									)}
+								</ProgressiveImage>
 							</SliderBox>
 						))}
 					</Slider>
@@ -171,3 +196,5 @@ export default function MainSlide() {
 		</>
 	);
 }
+
+export default React.memo(MainSlide);

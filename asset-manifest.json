@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/lavre23/static/css/main.9f6335af.css",
-    "main.js": "/lavre23/static/js/main.ffc78db1.js",
-    "static/js/293.716e387a.chunk.js": "/lavre23/static/js/293.716e387a.chunk.js",
-    "static/js/404.1b1e898b.chunk.js": "/lavre23/static/js/404.1b1e898b.chunk.js",
+    "main.js": "/lavre23/static/js/main.848e828c.js",
+    "static/js/293.d494b859.chunk.js": "/lavre23/static/js/293.d494b859.chunk.js",
+    "static/js/404.c16550cd.chunk.js": "/lavre23/static/js/404.c16550cd.chunk.js",
     "static/js/913.cdf7d787.chunk.js": "/lavre23/static/js/913.cdf7d787.chunk.js",
-    "static/js/828.a2eed928.chunk.js": "/lavre23/static/js/828.a2eed928.chunk.js",
+    "static/js/828.11c97146.chunk.js": "/lavre23/static/js/828.11c97146.chunk.js",
     "static/js/787.ad0b6e6d.chunk.js": "/lavre23/static/js/787.ad0b6e6d.chunk.js",
     "static/js/28.322a8768.chunk.js": "/lavre23/static/js/28.322a8768.chunk.js",
     "static/js/717.83dab705.chunk.js": "/lavre23/static/js/717.83dab705.chunk.js",
@@ -15,17 +15,17 @@
     "static/media/slick.woff": "/lavre23/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/lavre23/index.html",
     "main.9f6335af.css.map": "/lavre23/static/css/main.9f6335af.css.map",
-    "main.ffc78db1.js.map": "/lavre23/static/js/main.ffc78db1.js.map",
-    "293.716e387a.chunk.js.map": "/lavre23/static/js/293.716e387a.chunk.js.map",
-    "404.1b1e898b.chunk.js.map": "/lavre23/static/js/404.1b1e898b.chunk.js.map",
+    "main.848e828c.js.map": "/lavre23/static/js/main.848e828c.js.map",
+    "293.d494b859.chunk.js.map": "/lavre23/static/js/293.d494b859.chunk.js.map",
+    "404.c16550cd.chunk.js.map": "/lavre23/static/js/404.c16550cd.chunk.js.map",
     "913.cdf7d787.chunk.js.map": "/lavre23/static/js/913.cdf7d787.chunk.js.map",
-    "828.a2eed928.chunk.js.map": "/lavre23/static/js/828.a2eed928.chunk.js.map",
+    "828.11c97146.chunk.js.map": "/lavre23/static/js/828.11c97146.chunk.js.map",
     "787.ad0b6e6d.chunk.js.map": "/lavre23/static/js/787.ad0b6e6d.chunk.js.map",
     "28.322a8768.chunk.js.map": "/lavre23/static/js/28.322a8768.chunk.js.map",
     "717.83dab705.chunk.js.map": "/lavre23/static/js/717.83dab705.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9f6335af.css",
-    "static/js/main.ffc78db1.js"
+    "static/js/main.848e828c.js"
   ]
 }
